@@ -32,3 +32,4 @@ trigger: always_on
 
 - PowerShell 下把含中文的命令输出（git/mvn/python 等）捕获进变量做比对或解析前，必须先置 `[Console]::OutputEncoding=UTF8`，否则 PS 5.1 按 ANSI 解码产生乱码假阳性；直接显示不受影响。
 - 点目录（如 `.qoder/`）不被 glob 类搜索工具匹配时，列文件清单用 PowerShell `Get-ChildItem -Force` 且显式 `Write-Output` 输出（`Select-Object` 管道输出可能被吞成空结果）。
+- agent 终端 git 推送一律走 SSH（`GIT_SSH_COMMAND` 带 `BatchMode=yes -o StrictHostKeyChecking=accept-new`）：agent 终端禁用交互提示，HTTPS 推送会因无法弹出凭据登录而必然失败；遇 `terminal prompts disabled` 不重试 HTTPS，改走 SSH 或请用户手动推送。

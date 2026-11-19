@@ -56,6 +56,7 @@
 ## 5. 已知限制登记
 
 - 本仓库自举（dogfooding）采用 NTFS Junction 直连源目录：`.qoder/skills → skills/`、`.qoder/rules → rules/`，改动实时生效、不入库（见根 `.gitignore`）；install.ps1 仅用于对外项目分发，不在本仓库内运行。
+- Junction 删除与回退：删除 Junction 必须用 `cmd /c rmdir`（只删链接不动源目录）；禁止对 Junction 使用 `Remove-Item -Recurse`（PS 5.1 会跟进目标删掉源文件）。若 Junction 下运行时加载异常，回退为实体目录镜像：`cmd /c rmdir .qoder\skills`、`cmd /c rmdir .qoder\rules` 后执行 `robocopy skills .qoder\skills /MIR`、`robocopy rules .qoder\rules /MIR`；回退后每次改完 kit 需重跑两条 robocopy，`.gitignore` 排除项不变。
 - 运行时注入行为 headless 不可验，本文件第 3 节为唯一核验口径；不得以沙箱通过声称"注入已验证"。
 - Qoder 对未知 frontmatter 键（stack）的容忍度未真机核验前，保持"结构证据 + 待核验"状态。
 - 首批栈示例仅 java / vue / python；其他语言按 README「换语言」指引增补 stack 规则，不改技能正文。
