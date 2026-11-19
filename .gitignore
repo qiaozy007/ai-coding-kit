@@ -1,0 +1,8 @@
+# 本仓库自举：.qoder/skills 与 .qoder/rules 是指向源目录的 Junction，不入库
+.qoder/skills/
+.qoder/rules/
+
+# IDE 与本地配置不入库
+.idea/
+*.iml
+.qoder/settings.local.json
