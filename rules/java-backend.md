@@ -33,8 +33,8 @@ description: Java/Spring 后端编码硬约束与构建验证命令口径；触�
 - 构造器注入（`@RequiredArgsConstructor`），禁止字段 `@Autowired`；单例 Bean 禁止实例字段存请求/任务级状态；ThreadLocal 用完必 `remove()`；监听器/回调注册必须对应注销，大对象引用及时释放。
 - 配置用 `@ConfigurationProperties` 类型安全绑定；`@Transactional` 仅 Service 公开方法 + `rollbackFor = Exception.class`，纯查询只读。
 - 同类自调用不走代理（事务/@Async 失效）须拆 Bean；事务内禁远程调用/文件 IO/慢查询/发消息；`REQUIRES_NEW` 须说明理由并评估连接池耗尽风险。
-- 禁循环单条查库（N+1）：IN/JOIN FETCH/@EntityGraph/批处理；批量写入用 `JdbcTemplate.batchUpdate` 或 saveAll+batch_size（注意 IDENTITY 陷阱，见 sql-data-java 规则），超大规模分批提交。
-- 深度 OFFSET 禁用，改 keyset 分页；SQL 一律参数绑定，动态表名列名白名单；Entity 不出数据访问边界，跨层用 DTO/Projection。
+- 禁循环单条查库（N+1）：IN/JOIN FETCH/@EntityGraph/批处理；批量写入用 `JdbcTemplate.batchUpdate` 或 saveAll+batch_size（IDENTITY 陷阱与超大规模分批提交纪律见 sql-data-java 规则）。
+- 深度 OFFSET 禁用，改 keyset 分页；SQL 一律参数绑定，动态表名列名白名单。
 
 ## 并发与防护
 - 线程池按用途隔离，`ThreadPoolExecutor` 显式参数+拒绝策略，禁止 `Executors` 快捷无界池；`CompletableFuture` 显式专用池+异常分支（exceptionally/handle）。

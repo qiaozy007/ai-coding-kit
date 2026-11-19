@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Git 提交助手。分析暂存/未暂存变更，按 Conventional Commits 格式（中文 scope 与主题）生成提交信息，经用户明确确认后才执行 git commit，绝不主动提交。当用户要求提交代码、写 commit message、整理提交、/commit 时使用。
+description: Git 提交助手。按 Conventional Commits 格式（中文 scope 与主题）生成提交信息，经用户明确确认后才执行 git commit，绝不主动提交。当用户要求提交代码、写 commit message、整理提交、/commit 时使用。
 trigger: manual
 ---
 # commit Git 提交助手

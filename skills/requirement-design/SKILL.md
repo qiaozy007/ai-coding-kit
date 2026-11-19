@@ -1,6 +1,6 @@
 ---
 name: requirement-design
-description: 业务需求拆解与设计技能（语言中立）。将业务需求转化为可实施、可验证、可追溯的标准设计方案：全链路流程拆解与状态机建模、功能点与边界异常场景枚举、领域模型与数据表设计、接口契约、技术方案选型（事务/缓存/幂等/异步/锁）、变更影响面、有序开发任务清单与风险识别。当用户提出新需求、需求拆解、流程梳理、方案细化、模块设计、接口设计、表结构设计，或完成 grill-me 需求拷问后进入方案阶段时使用。
+description: 业务需求拆解与设计技能（语言中立）。覆盖：全链路流程拆解与状态机建模、功能点与边界异常场景枚举、领域模型与数据表设计、接口契约、技术方案选型（事务/缓存/幂等/异步/锁）、变更影响面、开发任务清单与风险识别。当用户提出新需求、需求拆解、流程梳理、方案细化、模块设计、接口设计、表结构设计，或完成 grill-me 需求拷问后进入方案阶段时使用。
 trigger: manual
 ---
 # requirement-design 需求拆解设计
@@ -153,4 +153,4 @@ trigger: manual
 
 ## 启动方式
 
-在对话中输入 `/requirement-design`，然后给出需求描述或指向需求材料（`docs/changes/<变更名>/clarification.md`、对话、Excel 核对表等）。若尚无变更目录，先用 `/spec propose <变更名>` 建脚手架。收到需求后，先读 `docs/INDEX.md` 与相关域 `docs/specs/`、再阅读相关代码与需求材料复述确认业务目标，按八步方法论产出 **Delta + design.md + tasks.md 三份产物**并落盘到 `docs/changes/<变更名>/`。含架构决策点时，提示先使用 `/architecture-design` 细化（写入 `design.md` 架构决策节）；无架构决策点时，提示可直接使用 `/senior-dev` 按 `tasks.md` 逐项实施。
+在对话中输入 `/requirement-design`，给出需求描述或指向需求材料（`docs/changes/<变更名>/clarification.md`、对话、Excel 核对表等）；若尚无变更目录，先用 `/spec propose <变更名>` 建脚手架。收到需求后按「技能链定位」先读基准，再阅读相关代码与需求材料复述确认业务目标，按八步方法论产出 **Delta + design.md + tasks.md 三份产物**并依「产出契约」落盘；含架构决策点时提示先使用 `/architecture-design` 细化，无架构决策点时提示可直接使用 `/senior-dev` 按 `tasks.md` 逐项实施。

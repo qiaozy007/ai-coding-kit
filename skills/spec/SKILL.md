@@ -1,6 +1,6 @@
 ---
 name: spec
-description: 文档生命周期管理技能（OpenSpec 式，语言中立）。不生成任何业务/代码内容，只负责 changes/ 变更脚手架的创建与初始化、产物状态核对、SP 规则增量合并、归档，以及四类校验（结构/追溯完整性/归档前置/并行冲突）。当用户需要初始化文档三区、登记变更、推进变更产物、校验变更、归档变更时使用。配合 /grill-me /requirement-design /architecture-design /senior-dev 使用，本技能管"文档放哪、叫什么、能不能归档"，不管内容怎么写。
+description: 文档生命周期管理技能（OpenSpec 式，语言中立）。不生成任何业务/代码内容，只管 changes/ 变更脚手架创建与初始化、产物状态核对、SP 规则增量合并、归档，以及四类校验（结构/追溯完整性/归档前置/并行冲突）。当用户需要初始化文档三区、登记变更、推进变更产物、校验变更、归档变更时使用。
 trigger: manual
 ---
 # spec 文档生命周期管理
@@ -94,7 +94,7 @@ R-xx（澄清）→ FP-xx（功能点）→ T-xx（任务）
 **① 结构校验**
 - `proposal.md` 四节齐全，`Non-goals` 非空；
 - delta 每条规则有 `SP` 编号 + `SHALL` 语句 + 至少一个 `WHEN/THEN` 场景；
-- delta 中**禁止出现** DDL、内部类名/包路径、框架选型（`代码证据` 行只允许"类名#方法名"粒度）；
+- delta 违反「spec 内容铁律」：禁止出现 DDL、内部类名/包路径、框架选型（`代码证据` 行只允许"类名#方法名"粒度）；
 - `tasks.md` 任务状态一律用标准 markdown 任务清单语法（`- [x]` 完成 / `- [ ]` 未完成），禁止用 ✅/⬜/⛔/⏳ 等符号或表格状态列表达；每项有依赖、完成定义、回溯编号（FP/SP）、具体文件路径与验证命令；无占位符（TODO/???/TKTK/`<placeholder>` 等）（借鉴 superpowers writing-plans：Bite-Sized / No Placeholders）。
 
 **② 追溯完整性校验**
@@ -161,4 +161,4 @@ R-xx（澄清）→ FP-xx（功能点）→ T-xx（任务）
 
 ## 启动方式
 
-在对话中输入 `/spec <init|propose|status|verify|archive> [<变更名>] [--no-delta]`。本技能只读写 `docs/`，不碰代码与业务内容。校验类动作必须逐条给出可判真假的通过/失败结论，失败即阻断（尤其 archive 前 verify 不过禁止归档）。
+在对话中输入 `/spec <init|propose|status|verify|archive> [<变更名>] [--no-delta]`。校验类动作必须逐条给出可判真假的通过/失败结论，失败即阻断（尤其 archive 前 verify 不过禁止归档）。
