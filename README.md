@@ -6,7 +6,7 @@
 
 | 层 | 目录 | 职责 |
 |---|---|---|
-| 流程层 | `skills/`（11 件） | 中立技能：spec / grill-me / requirement-design / architecture-design / senior-dev / tdd / ui-dev / code-review / commit / retro / product-senior |
+| 流程层 | `skills/`（9 件） | 中立技能：spec / grill-me / requirement-design / architecture-design / senior-dev / code-review / commit / retro / product-senior |
 | 纪律层 | `rules/`（14 件） | core 8 件（always_on/model_decision，语言中立纪律）+ stack 6 件（glob 触发，java/vue/python 硬约束，共存隔离） |
 | 适配层 | `adapters/`（5 件） | install.ps1 / install.sh 安装映射，lint.ps1 结构校验，verify-sandbox.ps1 沙箱验证，PORTING.md 映射与降级契约 |
 
@@ -19,7 +19,7 @@
 ```
 /spec propose → /product-senior(可选) → /grill-me → /requirement-design
               → [/architecture-design(有架构决策时)]
-              → /ui-dev(前端) ↔ /senior-dev(后端) 或 /tdd(TDD)
+              → /senior-dev(编码单一入口：后端/前端/全栈轨道 × 默认/TDD 模式)
               → /code-review(质量门禁) → /spec verify → /spec archive
 ```
 
@@ -30,7 +30,7 @@
 | 需求拷问 | `/grill-me` | 一次一问挖掘隐性规则、边界、异常、并发、事务、数据风险 | 需求澄清文档（R-xx） |
 | 需求拆解 | `/requirement-design` | 流程拆解、功能点 FP-xx、表/接口设计、技术选型、有序任务清单 T-xx | specs delta + `design.md` + `tasks.md` |
 | 架构设计（有决策点时） | `/architecture-design` | 裁决架构决策点，产出实施约束清单 | `design.md`「架构决策」节 |
-| 编码 | `/senior-dev` 或 `/tdd`；前端 `/ui-dev` | 按任务清单实现；tdd 强制先写失败测试再最小实现 | 代码 + 测试 + `implementation.md` |
+| 编码 | `/senior-dev`（单一入口） | 按任务轨道（后端/前端/全栈）× 方法模式（默认/TDD）判定；TDD 模式强制先写失败测试再最小实现 | 代码 + 测试 + `implementation.md` |
 | 质量门禁 | `/code-review` | 分级审查报告，越界拦截 | 评审报告 |
 | 校验归档 | `/spec verify` → `/spec archive` | 四类校验通过后 delta 合入 specs，变更归档 | `specs/` 更新 + `archive/` |
 
@@ -38,7 +38,7 @@
 
 **链路裁剪**：按变更大小裁剪技能链——小改动可跳过产品与架构环节直接进入编码；`/code-review` 只在核心逻辑变更/合并前跑一次；Bug 修复只补 1 个回归用例，新功能才完整覆盖。
 
-## 技能清单（11 件）
+## 技能清单（9 件）
 
 | 命令 | 定位与职责 |
 |---|---|
@@ -47,9 +47,7 @@
 | `/grill-me` | 需求拷问专家：编码前挖掘隐性业务规则、边界条件、异常、并发、事务、数据风险；一次只提 1 个问题直到所有维度确认，输出需求澄清文档交接给需求拆解。 |
 | `/requirement-design` | 需求拆解与设计：全链路流程拆解与状态机建模、功能点与边界异常场景枚举、领域模型与数据表设计、接口契约、技术选型（事务/缓存/幂等/异步/锁）、变更影响面、有序开发任务清单与风险识别。 |
 | `/architecture-design` | 资深架构师（工作流层）：分层与依赖/SOLID/并发/事务/性能/安全核心准则、方案评审与交付模板；产出实施约束清单供编码阶段强制遵循。 |
-| `/senior-dev` | 资深开发编码专家（工作流层）：编码实现、Bug 修复、重构与前后端接口交接契约落地；编码与测试硬约束由当前栈 rules 自动注入。 |
-| `/tdd` | 测试驱动开发：先写失败测试，再写最小实现通过测试，最后重构；Red-Green-Refactor 循环，承接设计文档的任务清单驱动测试用例设计。 |
-| `/ui-dev` | 资深 UI 前端专家（工作流层）：双轨技术栈判定（存量读代码基线 / 新页面按当前栈前端 rules）、前后端链式交接、自查与交付模板。 |
+| `/senior-dev` | 资深开发编码专家（工作流层，编码阶段单一入口）：按任务轨道（后端/前端/全栈）× 方法模式（默认/TDD）判定；编码实现、Bug 修复、重构、前端双轨选型与前后端接口交接契约落地；TDD 模式强制 Red-Green-Refactor 循环。编码与测试硬约束由当前栈 rules 自动注入。 |
 | `/code-review` | 资深架构与代码审查：覆盖业务逻辑、架构合理性、并发安全、事务边界、性能隐患、安全漏洞、异常处理、可维护性，输出严重/一般/建议分级报告与可落地修改意见。 |
 | `/commit` | Git 提交助手：分析变更按 Conventional Commits（中文 scope 与主题）生成提交信息，经用户明确确认后才提交，绝不主动提交、不跳过钩子、不夹带无关改动。 |
 | `/retro` | 会话环境复盘：基于会话真实证据建议改进仓库环境（条款/门禁/导航/技能），按严重度排序，只建议不动手。 |
@@ -84,7 +82,7 @@
 
 ## 推荐用法
 
-- **中大型新功能**：走完整技能链。从 `/spec propose` 登记变更开始，需求不清先 `/grill-me` 拷问，有架构决策点才进 `/architecture-design`；编码阶段后端 `/senior-dev` 或 `/tdd`、前端 `/ui-dev`，合并前 `/code-review` 一次，最后 `/spec verify` + `/spec archive` 收口。
+- **中大型新功能**：走完整技能链。从 `/spec propose` 登记变更开始，需求不清先 `/grill-me` 拷问，有架构决策点才进 `/architecture-design`；编码阶段统一 `/senior-dev`（自动判定轨道与模式），合并前 `/code-review` 一次，最后 `/spec verify` + `/spec archive` 收口。
 - **小改动（文案/配置/局部修复）**：裁剪链路，直接 `/senior-dev` 或按规则直接修改，跳过产品/架构/拷问环节；验证仍按当前栈 rules 命令口径真实执行。
 - **Bug 修复**：`/senior-dev` 修复并只补 1 个回归用例；先定位根因再动手，不夹带无关重构。
 - **纯咨询/评审/排查**：不改文件；plan-first 规则会自动先给方案+推荐或分析结论+证据，确认后才执行。只读咨询建议用 IDE 的只读/Ask 模式省 Credits。

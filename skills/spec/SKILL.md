@@ -1,6 +1,6 @@
 ---
 name: spec
-description: 文档生命周期管理技能（OpenSpec 式，语言中立）。不生成任何业务/代码内容，只负责 changes/ 变更脚手架的创建与初始化、产物状态核对、SP 规则增量合并、归档，以及四类校验（结构/追溯完整性/归档前置/并行冲突）。当用户需要初始化文档三区、登记变更、推进变更产物、校验变更、归档变更时使用。配合 /grill-me /requirement-design /architecture-design /senior-dev /tdd 使用，本技能管"文档放哪、叫什么、能不能归档"，不管内容怎么写。
+description: 文档生命周期管理技能（OpenSpec 式，语言中立）。不生成任何业务/代码内容，只负责 changes/ 变更脚手架的创建与初始化、产物状态核对、SP 规则增量合并、归档，以及四类校验（结构/追溯完整性/归档前置/并行冲突）。当用户需要初始化文档三区、登记变更、推进变更产物、校验变更、归档变更时使用。配合 /grill-me /requirement-design /architecture-design /senior-dev 使用，本技能管"文档放哪、叫什么、能不能归档"，不管内容怎么写。
 trigger: manual
 ---
 # spec 文档生命周期管理
@@ -11,7 +11,7 @@ trigger: manual
 
 ## 边界（本技能严禁做的事）
 
-- 严禁撰写需求、用户故事、设计方案、代码——那是 `/grill-me`、`/product-senior`、`/requirement-design`、`/architecture-design`、`/senior-dev`、`/tdd`、`/ui-dev` 的职责；
+- 严禁撰写需求、用户故事、设计方案、代码——那是 `/grill-me`、`/product-senior`、`/requirement-design`、`/architecture-design`、`/senior-dev` 的职责；
 - 严禁凭空生成 `SP-xx` 规则或替用户核验规则与代码是否一致（核验由内容技能 + 用户确认完成）；
 - 严禁修改业务源码目录（如 `src/`）下任何文件；只读写 `docs/` 与 `docs/INDEX.md`。
 
@@ -30,9 +30,9 @@ docs/
 │   ├── clarification.md     # /grill-me 产出
 │   ├── specs/<域>/spec.md    # Delta（增量规则：新增/修改/废弃）
 │   ├── design.md            # 技术设计（含「架构决策」节）
-│   ├── contract.md          # /ui-dev 前后端接口交接契约
+│   ├── contract.md          # 前后端接口交接契约（senior-dev 前端轨道产出）
 │   ├── tasks.md             # 任务清单（标准 markdown 任务清单 - [x]/- [ ]，含"覆盖的 SP/FP"）
-│   └── implementation.md    # /tdd 或 /senior-dev 交付记录
+│   └── implementation.md    # /senior-dev 交付记录
 └── archive/<日期>-<变更名>/   # 已结案，整体搬来，只读
 ```
 

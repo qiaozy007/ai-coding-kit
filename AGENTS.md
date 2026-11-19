@@ -26,7 +26,7 @@
 ```
 /spec propose → /product-senior(可选) → /grill-me → /requirement-design
               → [/architecture-design(有架构决策时)]
-              → /ui-dev(前端) ↔ /senior-dev(后端) 或 /tdd(TDD)
+              → /senior-dev(编码单一入口：后端/前端/全栈轨道 × 默认/TDD 模式)
               → /code-review(质量门禁) → /spec verify → /spec archive
 ```
 

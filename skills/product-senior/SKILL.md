@@ -11,7 +11,7 @@ trigger: manual
 
 ## 技能链定位（环节0，可选前置）
 
-`/spec propose` → product-senior（产品分析）→ `/grill-me`（需求拷问澄清）→ `/requirement-design`（需求拆解设计）→ `/architecture-design`（架构设计）→ `/ui-dev`（前端实现）→ `/senior-dev`（后端实现）。
+`/spec propose` → product-senior（产品分析）→ `/grill-me`（需求拷问澄清）→ `/requirement-design`（需求拆解设计）→ `/architecture-design`（架构设计）→ `/senior-dev`（编码实现：前端轨道先行，交付后按链式判定切换后端轨道）。
 
 本环节为可选前置：当用户需要先从产品视角梳理需求、写用户故事、规划路线时启用；当用户已有清晰需求可直接进入 `/grill-me` 时跳过本环节。
 

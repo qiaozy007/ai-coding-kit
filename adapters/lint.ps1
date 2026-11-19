@@ -1,7 +1,7 @@
 ﻿# lint.ps1 — ai-coding-kit 结构 lint（frontmatter / 交叉引用 / 清单完整性）
 # 用法：powershell -NoProfile -ExecutionPolicy Bypass -File ai-coding-kit\adapters\lint.ps1
 # 规则（与 docs/changes/add-ai-coding-kit/design.md「lint 规则」一致）：
-#   1. skills 清单 = 11 个中立名；每个目录含 SKILL.md；name=目录名、description 非空、trigger: manual。
+#   1. skills 清单 = 9 个中立名；每个目录含 SKILL.md；name=目录名、description 非空、trigger: manual。
 #   2. core 8 件：trigger ∈ {always_on, model_decision}；model_decision 必须非空 description；不得含 stack 键。
 #   3. stack 6 件：trigger = glob；glob 列表非空；stack ∈ {java, vue, python}；description 非空。
 #   4. 交叉引用：技能正文中的斜杠命令必须存在于 skills 清单；禁止残留旧名。
@@ -11,10 +11,10 @@
 $ErrorActionPreference = 'Stop'
 $KitRoot = Split-Path -Parent $PSScriptRoot
 
-$SkillNames = @('spec', 'grill-me', 'requirement-design', 'architecture-design', 'senior-dev', 'tdd', 'ui-dev', 'code-review', 'commit', 'retro', 'product-senior')
+$SkillNames = @('spec', 'grill-me', 'requirement-design', 'architecture-design', 'senior-dev', 'code-review', 'commit', 'retro', 'product-senior')
 $CoreRules = @('work-discipline.md', 'output-fidelity.md', 'plan-first.md', 'testing.md', 'sql-data.md', 'api-contract.md', 'architecture.md', 'commit.md')
 $StackRules = @('java-backend.md', 'testing-java.md', 'sql-data-java.md', 'vue-frontend.md', 'python-backend.md', 'testing-python.md')
-$LegacyNames = @('java-requirement-design', 'java-architecture-design', 'java-senior-dev', 'ai-tdd', 'ui-senior-dev')
+$LegacyNames = @('java-requirement-design', 'java-architecture-design', 'java-senior-dev', 'ai-tdd', 'ui-senior-dev', 'tdd', 'ui-dev')
 $TemplateFiles = @('templates\AGENTS.md', 'templates\docs\INDEX.md', 'templates\docs\GLOSSARY.md', 'templates\docs\specs\_domains.md')
 $AdapterFiles = @('adapters\install.ps1', 'adapters\install.sh', 'adapters\lint.ps1', 'adapters\verify-sandbox.ps1', 'adapters\PORTING.md')
 
@@ -64,7 +64,7 @@ function Split-Frontmatter([string]$Text) {
 $actualSkillDirs = @(Get-ChildItem -LiteralPath (Join-Path $KitRoot 'skills') -Directory | ForEach-Object { $_.Name } | Sort-Object)
 $expectedSorted = @($SkillNames | Sort-Object)
 $diff = Compare-Object $expectedSorted $actualSkillDirs
-Check 'skills 清单 = 11 个中立名' ($null -eq $diff -and $actualSkillDirs.Count -eq 11) ("目录清单与预期不一致: " + (($diff | ForEach-Object { $_.InputObject + $_.SideIndicator }) -join ', '))
+Check 'skills 清单 = 9 个中立名' ($null -eq $diff -and $actualSkillDirs.Count -eq 9) ("目录清单与预期不一致: " + (($diff | ForEach-Object { $_.InputObject + $_.SideIndicator }) -join ', '))
 
 foreach ($name in $SkillNames) {
     $path = Join-Path $KitRoot "skills\$name\SKILL.md"

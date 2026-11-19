@@ -73,7 +73,7 @@ try {
         Check 'qoder glob frontmatter 完整（共存隔离结构证据）' $fmOk 'trigger/stack/glob 字段不完整'
     }
     $qSkills = @(Get-ChildItem -LiteralPath (Join-Path $projects['proj-qoder'] '.qoder\skills') -Directory)
-    Check 'qoder skills 落点齐全 11 件' ($qSkills.Count -eq 11) ("实际 $($qSkills.Count) 件")
+    Check 'qoder skills 落点齐全 9 件' ($qSkills.Count -eq 9) ("实际 $($qSkills.Count) 件")
     Check 'qoder 同名跳过不覆盖（sentinel 保留）' ((Read-Text $conflictPath) -eq $sentinel) '既有文件被覆盖'
     Check 'qoder 安装报告含 skipped' ($qoderOut -match 'skipped \([1-9]') '报告未体现 skipped'
     $tplOk = (Test-Path -LiteralPath (Join-Path $projects['proj-qoder'] 'AGENTS.md')) `
@@ -90,7 +90,7 @@ try {
     Check 'cursor work-discipline.mdc alwaysApply: true' ($wdMdc -match '(?m)^alwaysApply: true') 'core always_on 转换不符'
     Check 'cursor mdc 不携带 kit 自定义 stack 键' (-not ($javaMdc -match '(?m)^stack:')) 'stack 键泄漏进 mdc'
     $cCmds = @(Get-ChildItem -LiteralPath (Join-Path $projects['proj-cursor'] '.cursor\commands') -Filter '*.md')
-    Check 'cursor commands 落点齐全 11 件' ($cCmds.Count -eq 11) ("实际 $($cCmds.Count) 件")
+    Check 'cursor commands 落点齐全 9 件' ($cCmds.Count -eq 9) ("实际 $($cCmds.Count) 件")
     $cmdText = Read-Text (Join-Path $projects['proj-cursor'] '.cursor\commands\spec.md')
     Check 'cursor commands 已剥离 frontmatter' (-not ($cmdText.StartsWith('---'))) 'frontmatter 未剥离'
 
@@ -101,7 +101,7 @@ try {
     Check 'claude CLAUDE.md 标记块不含 java-backend.md' (-not $claudeText.Contains('java-backend.md')) '未选中栈泄漏'
     Check 'claude CLAUDE.md core 全量（含 work-discipline.md）' ($claudeText.Contains('work-discipline.md')) 'core 规则缺失'
     $clSkills = @(Get-ChildItem -LiteralPath (Join-Path $projects['proj-claude'] '.claude\skills') -Directory)
-    Check 'claude skills 落点齐全 11 件' ($clSkills.Count -eq 11) ("实际 $($clSkills.Count) 件")
+    Check 'claude skills 落点齐全 9 件' ($clSkills.Count -eq 9) ("实际 $($clSkills.Count) 件")
     # 幂等替换：换栈重装，标记块整块替换，块数仍为 1
     $null = (& $installScript -Ide claude-code -Stack java -Target $projects['proj-claude']) -join "`n"
     $claudeText2 = Read-Text $claudePath

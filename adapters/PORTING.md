@@ -27,7 +27,7 @@
 
 | 缺失能力 | 降级行为 |
 |---|---|
-| 无 Skill 工具自动链式调用 | 退化为手动按序输入斜杠命令（技能链顺序见 AGENTS.md 模板），链式语义与门禁不变；ui-dev 的"自动链式调用 senior-dev"退化为交付中显式提示下一步命令 |
+| 无 Skill 工具自动链式调用 | 退化为手动按序输入斜杠命令（技能链顺序见 AGENTS.md 模板），链式语义与门禁不变；senior-dev 的前端→后端链式为技能内部轨道切换，不依赖跨技能调用，无需降级 |
 | 无记忆机制 | 跨会话交接仅依赖 docs 交接三件套（已完成/进行中/下一步 + 验证证据回写 tasks.md 或 implementation.md）；retro 的"记忆→条款"分工行跳过 |
 | 无 glob 规则注入（Claude Code） | 由适配器按 `-Stack` 参数在安装期挑选栈规则写入 CLAUDE.md import 块；换栈 = 换参数重装 |
 | 无 model_decision 触发语义 | Cursor 转为 description + alwaysApply: false（Agent 按需请求），语义近似；差异列入下方手动核验 |

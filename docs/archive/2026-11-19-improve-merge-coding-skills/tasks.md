@@ -1,0 +1,37 @@
+# Tasks: improve-merge-coding-skills
+
+- [x] T-01 登记变更脚手架（proposal.md / design.md / tasks.md + INDEX 活跃清单）
+  - 覆盖的 FP：FP-01/FP-02/FP-03（追溯基座）；依赖：无
+  - 完成定义：docs/changes/improve-merge-coding-skills/ 三件齐全，INDEX.md 活跃清单已登记
+  - 文件：docs/changes/improve-merge-coding-skills/{proposal,design,tasks}.md、docs/INDEX.md
+  - 验证：/spec status 产物完成度核对
+- [x] T-02 重写 senior-dev SKILL.md（合并 tdd+ui-dev，轨道×模式判定，门禁逐字保留）
+  - 覆盖的 FP：FP-01、FP-02；依赖：T-01
+  - 完成定义：单一入口承载三轨道两模式；TDD 铁律与前端自查/契约语义完整；正文无小写 tdd/ui-dev、无 /tdd、/ui-dev
+  - 文件：skills/senior-dev/SKILL.md
+  - 验证：adapters\lint.ps1 frontmatter 与交叉引用检查通过
+- [x] T-03 删除 skills/tdd/、skills/ui-dev/
+  - 覆盖的 FP：FP-01；依赖：T-02
+  - 完成定义：两目录不存在，skills 目录数 = 9
+  - 文件：skills/tdd/SKILL.md、skills/ui-dev/SKILL.md
+  - 验证：adapters\lint.ps1 skills 清单断言通过
+- [x] T-04 修订 lint.ps1 与 verify-sandbox.ps1 清单计数
+  - 覆盖的 FP：FP-03；依赖：T-03
+  - 完成定义：$SkillNames 9 件、$LegacyNames 含 tdd/ui-dev、计数断言 9；lint.ps1 保持 UTF-8 带 BOM 且 Parser 零错误
+  - 文件：adapters/lint.ps1、adapters/verify-sandbox.ps1
+  - 验证：PowerShell Parser 零错误 + 两脚本执行全绿
+- [x] T-05 同步文档与技能交叉引用
+  - 覆盖的 FP：FP-03；依赖：T-03
+  - 完成定义：README/根 AGENTS.md/templates/AGENTS.md 链图与清单、PORTING.md 降级行、code-review/product-senior/spec 引用全部指向合并后结构；被扫描文件无小写旧名残留
+  - 文件：README.md、AGENTS.md、templates/AGENTS.md、adapters/PORTING.md、skills/code-review/SKILL.md、skills/product-senior/SKILL.md、skills/spec/SKILL.md
+  - 验证：adapters\lint.ps1 旧名残留与交叉引用检查通过
+- [x] T-06 全量验证
+  - 覆盖的 FP：FP-03；依赖：T-04、T-05
+  - 完成定义：lint.ps1 与 verify-sandbox.ps1 均 exit=0
+  - 文件：无新增（执行验证）
+  - 验证：adapters\lint.ps1；adapters\verify-sandbox.ps1
+- [x] T-07 交付记录回写
+  - 覆盖的 FP：FP-01/FP-02/FP-03；依赖：T-06
+  - 完成定义：implementation.md 落盘含验证证据；tasks.md 全勾选；INDEX 产物完成度更新为齐备
+  - 文件：docs/changes/improve-merge-coding-skills/implementation.md、tasks.md、docs/INDEX.md
+  - 验证：/spec verify improve-merge-coding-skills 四类校验通过
